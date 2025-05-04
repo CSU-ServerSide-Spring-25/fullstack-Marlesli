@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 9000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const weatherRoutes = require('./routes/weather');
+app.use('/api/weather', weatherRoutes);
+
 
 app.get('/forecast', async (req, res) => {  // example with data /forecast?location=31909&days=3
     try {
