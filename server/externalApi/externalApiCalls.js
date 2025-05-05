@@ -1,5 +1,5 @@
 const axios = require('axios');
- const apiKey = 'YouApiKey'
+ const apiKey = 'c8a0e813580a474584c181228250405'
  //forecast api
  
  module.exports = {
