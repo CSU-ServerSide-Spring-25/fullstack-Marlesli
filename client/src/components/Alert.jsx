@@ -11,7 +11,7 @@ const Alert = (props) => {
                     </h2>
                 </div>
                 <div style={{ display: 'flex', justifyContent: "center" }}>
-                    {activeTabData.alerts.alert.map((alert, index) => {
+                {activeTabData.alerts && activeTabData.alerts.alert && activeTabData.alerts.alert.map((alert, index) => {
                         return (
                             <div key={index} className="card" style={{ width: "18rem", margin: '20px' }}>
                                 <div className="card-body">

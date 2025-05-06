@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Navbar = (props) => {
     const [formData, setFormData] = useState({
-        zipCode: null
+        zipCode: ''
     });
     const [isValid, setIsValid] = useState('not-set')
     const { checkClassActive, setActiveTab, handleSubmit, showAlert, setShowAlert } = props;

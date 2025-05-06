@@ -5,35 +5,40 @@ import Navbar from './components/Navbar';
 
 function App() {
     const [activeTab, setActiveTab] = useState('c');
-    const [activeTabData, setActiveTabData] = useState({})
-    const [showAlert, setShowAlert] = useState(false)
+    const [activeTabData, setActiveTabData] = useState({});
+    const [showAlert, setShowAlert] = useState(false);
+
     const checkClassActive = (tab) => {
-        return `btn btn-${tab === activeTab ? 'primary' : 'dark'}`
-    }
-    const handleSubmit = (zipCode) => {
-        let url = 'http://127.0.0.1:9000'
+        return `btn btn-${tab === activeTab ? 'primary' : 'dark'}`;
+    };
+
+    const handleSubmit = async (zipCode) => {
+        let url = 'http://localhost:9000';
         switch (activeTab) {
-            case ('f'):
+            case 'f':
                 url += `/forecast?location=${zipCode}&days=3`;
                 break;
-            case ('c'):
+            case 'c':
                 url += `/current?location=${zipCode}`;
                 break;
-            case ('a'):
+            case 'a':
                 url += `/alerts?location=${zipCode}`;
                 break;
             default:
-                break;
+                return;
         }
-        axios.get(url).then(response => {
-            const respData = {}
-            respData[activeTab] = response.data
-            setActiveTabData({ ...activeTabData, ...respData })
-        }).catch(err => {
-            console.log(err)
-            setShowAlert(true)
-        })
-    }
+
+        try {
+            const response = await axios.get(url);
+            console.log("Data received from server:", response.data); 
+            setActiveTabData(prev => ({ ...prev, [activeTab]: response.data }));
+            setShowAlert(false);
+        } catch (error) {
+            console.error("API call failed:", error);
+            setShowAlert(true);
+        }       
+    };
+
     return (
         <div>
             <Navbar

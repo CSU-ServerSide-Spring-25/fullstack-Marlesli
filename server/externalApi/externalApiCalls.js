@@ -1,10 +1,9 @@
 const axios = require('axios');
- const apiKey = 'c8a0e813580a474584c181228250405'
- //forecast api
+ const apiKey = '7bdf9401fdc14380974171809250505'
  
  module.exports = {
      forecastApi: async (location, days) => {
-         return await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=${days}&aqi=no&alerts=no`)
+         return await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=${days}&aqi=no&alerts=no`)
              .then(function (response) {
                 return response.data;
              })
@@ -17,7 +16,7 @@ const axios = require('axios');
 
               // current weather 
     currentWeatherApi: async (location) => {
-        return await axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`)
+        return await axios.get(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`)
             .then(response => response.data)
             .catch(error => {
                 console.log(error);
@@ -27,7 +26,7 @@ const axios = require('axios');
 
     //Alerts API
     alertsApi: async (location) => {
-        return await axios.get(`http://api.weatherapi.com/v1/alerts.json?key=${apiKey}&q=${location}&days=1&alerts=yes`)
+        return await axios.get(`https://api.weatherapi.com/v1/alerts.json?key=${apiKey}&q=${location}&days=1&alerts=yes`)
             .then(response => response.data.alerts || [])
             .catch(error => {
                 console.log(error);
